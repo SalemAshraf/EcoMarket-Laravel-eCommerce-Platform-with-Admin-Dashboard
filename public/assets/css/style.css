@@ -1,9 +1,4 @@
-/*!
- * Bootstrap v5.0.0-beta1 (https://getbootstrap.com/)
- * Copyright 2011-2020 The Bootstrap Authors
- * Copyright 2011-2020 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+
 /*-----------------------------------------------*/
 /*------------------ Base Colors ----------------*/
 /*-----------------------------------------------*/
@@ -60,7 +55,7 @@
 /*------------------ Shop Checkout --------------*/
 /*-----------------------------------------------*/
 :root {
-  --bs-blue: #0d6efd;
+  --bs-blue: #000000;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
@@ -83,7 +78,7 @@
   --bs-lighter: #faf9f8;
   --bs-dark: #222222;
   --bs-red: #c32929;
-  --bs-beige: #b9a16b;
+  --bs-beige: #000000;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)); }
@@ -2430,9 +2425,9 @@ progress {
     color: #9c2121; }
 
 .link-beige {
-  color: #b9a16b; }
+  color: #000000; }
   .link-beige:hover, .link-beige:focus {
-    color: #c7b489; }
+    color: #000000; }
 
 .ratio {
   position: relative;
@@ -6050,7 +6045,7 @@ progress {
  *
  * bootstrap-slider is released under the MIT License
  * Copyright (c) 2019 Kyle Kemp, Rohit Kalkur, and contributors
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -6059,10 +6054,10 @@ progress {
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -12297,7 +12292,7 @@ textarea.form-control-lg {
     width: 1rem;
     height: 1rem;
     border-radius: 100%;
-    background: #b9a16b;
+    background: #000000;
     color: #ffffff;
     font-size: 0.625rem;
     line-height: 1rem;
@@ -13881,7 +13876,6 @@ textarea.form-control-lg {
     display: flex;
     align-items: center;
     gap: 0.625rem;
-    padding: 0 0 0.625rem;
     text-transform: uppercase;
     border: 0;
     background-color: transparent;

@@ -17,3 +17,14 @@
 .form-floating>.form-select {
     height: 48px;
 }
+
+span.pr-6px {
+    padding-right: 8px;
+}
+.list-item{
+    display: flex;
+    justify-content: space-between;
+}
+.filled-heart {
+    color: red;
+}
