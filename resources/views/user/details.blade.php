@@ -10,30 +10,55 @@
                             <div class="swiper-container">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide product-single__image-item">
-                                        <img loading="lazy" class="h-auto w-100"
-                                            src="{{asset('uploads')}}/{{$product->image}}" width="674" height="674"
-                                            alt="" />
-                                        <a data-fancybox="gallery" href="{{asset('uploads')}}/{{$product->image}}"
-                                            data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_zoom" />
-                                            </svg>
-                                        </a>
+                                        @if($product && $product->image)
+    <img loading="lazy" class="h-auto w-100"
+        src="{{ asset('uploads/' . $product->image) }}"
+        width="674" height="674" alt="{{ $product->name ?? 'Product Image' }}" />
+
+    <a data-fancybox="gallery"
+        href="{{ asset('uploads/' . $product->image) }}"
+        data-bs-toggle="tooltip"
+        data-bs-placement="left"
+        title="Zoom">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <use href="#icon_zoom" />
+        </svg>
+    </a>
+@else
+    <img loading="lazy" class="h-auto w-100"
+        src="{{ asset('images/no-image.png') }}"
+        width="674" height="674" alt="No Image Available" />
+@endif
                                     </div>
-                                    @foreach (explode(",", $product->images) as $gimg)
-                                        <div class="swiper-slide product-single__image-item">
-                                            <img loading="lazy" class="h-auto w-100 w-100"
-                                                src="{{asset('uploads')}}/{{trim($gimg)}}" width="674" height="674" alt="" />
-                                            <a data-fancybox="gallery" href="{{asset('uploads')}}/{{trim($gimg)}}"
-                                                data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <use href="#icon_zoom" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    @endforeach
+                                    @if(!empty($product->images))
+    @foreach (explode(',', $product->images) as $gimg)
+        @php $gimg = trim($gimg); @endphp
+        @if(!empty($gimg))
+            <div class="swiper-slide product-single__image-item">
+                <img loading="lazy" class="h-auto w-100"
+                    src="{{ asset('uploads/' . $gimg) }}" width="674" height="674" alt="{{ $product->name ?? 'Product Image' }}" />
+
+                <a data-fancybox="gallery"
+                    href="{{ asset('uploads/' . $gimg) }}"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="left"
+                    title="Zoom">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <use href="#icon_zoom" />
+                    </svg>
+                </a>
+            </div>
+        @endif
+    @endforeach
+@else
+    <div class="swiper-slide product-single__image-item">
+        <img loading="lazy" class="h-auto w-100"
+            src="{{ asset('images/no-image.png') }}" width="674" height="674" alt="No Image Available" />
+    </div>
+@endif
+
                                 </div>
                                 <div class="swiper-button-prev"><svg width="7" height="11" viewBox="0 0 7 11"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -46,20 +71,36 @@
                             </div>
                         </div>
                         <div class="product-single__thumbnail">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide product-single__image-item"><img loading="lazy"
-                                            class="h-auto w-100 w-100" src="{{asset('uploads')}}/{{$product->image}}"
-                                            width="104" height="104" alt="" /></div>
-                                    @foreach (explode(",", $product->images) as $gimg)
-                                        <div class="swiper-slide product-single__image-item">
-                                            <img loading="lazy" class="h-auto w-100 w-100"
-                                                src="{{asset('uploads')}}/{{trim($gimg)}}" width="104" height="104" alt="" />
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            @if(!empty($product->image))
+                <div class="swiper-slide product-single__image-item">
+                    <img loading="lazy"
+                        class="h-auto w-100"
+                        src="{{ asset('uploads/' . $product->image) }}"
+                        width="104" height="104"
+                        alt="{{ $product->name ?? 'Product Image' }}" />
+                </div>
+            @endif
+
+            @if(!empty($product->images))
+                @foreach (explode(',', $product->images) as $gimg)
+                    @php $gimg = trim($gimg); @endphp
+                    @if(!empty($gimg))
+                        <div class="swiper-slide product-single__image-item">
+                            <img loading="lazy"
+                                class="h-auto w-100"
+                                src="{{ asset('uploads/' . $gimg) }}"
+                                width="104" height="104"
+                                alt="{{ $product->name ?? 'Product Image' }}" />
                         </div>
+                    @endif
+                @endforeach
+            @endif
+        </div>
+    </div>
+</div>
+
                     </div>
                 </div>
                 <div class="col-lg-5">
@@ -448,7 +489,7 @@
                         @foreach ($rproducts as $rproduct)
                             <div class="swiper-slide product-card">
                                 <div class="pc__img-wrapper">
-                                    <a href="details.php">
+                                    <a href="{{ route('shop.product.details', ["product_slug" => $rproduct->slug]) }}">
                                         <img loading="lazy" src="{{asset('uploads')}}/{{$rproduct->image}}" width="330"
                                             height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                         @if(count(explode(",", $rproduct->images)) > 0)
@@ -462,7 +503,7 @@
                                         data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
                                 </div>
                                 <div class="pc__info position-relative">
-                                    <p class="pc__category">d</p>
+                                    <p class="pc__category">{{ $product->Category->name }}</p>
                                     <h6 class="pc__title"><a href="details.php">{{$rproduct->name}}</a></h6>
                                     <div class="product-card__price d-flex">
                                         <span class="money price">${{$rproduct->regular_price}}</span>
