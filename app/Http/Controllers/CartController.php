@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderPlacedMail;
 use App\Models\Address;
 use App\Models\Coupon;
 use App\Models\Order;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Surfsidemedia\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -196,6 +197,7 @@ public function place_order(Request $request)
     session()->forget('checkout');
     session()->forget('coupon');
     session()->forget('discounts');
+    Mail::to($order->user->email)->send(new OrderPlacedMail($order));
     return redirect()->route('cart.confirmation');
 }
 public function setAmountForCheckout()

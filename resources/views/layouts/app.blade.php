@@ -316,7 +316,7 @@
             <div class="d-flex align-items-center mb-3">
                 <svg width="20" height="20"><use href="#icon_user" /></svg>
                 @auth
-                    <a href="{{ route('account.dashboard') }}" class="ms-2 text-uppercase fw-medium text-decoration-none">My Account</a>
+                    <a href="{{ route('user.index') }}" class="ms-2 text-uppercase fw-medium text-decoration-none">My Account</a>
                 @else
                     <a href="{{ route('login') }}" class="ms-2 text-uppercase fw-medium text-decoration-none">Login / Register</a>
                 @endauth
